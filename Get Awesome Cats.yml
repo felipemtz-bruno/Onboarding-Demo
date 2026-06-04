@@ -1,0 +1,267 @@
+info:
+  name: Get Awesome Cats
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrlCat}}/images/search?limit=1"
+  headers:
+    - name: x-api-key
+      value: YOUR-API-KEY
+    - name: Accept
+      value: application/json
+  params:
+    - name: size
+      value: med
+      type: query
+      description: "[optional] thumb , small, med or full - small is perfect for Discord"
+      disabled: true
+    - name: mime_types
+      value: jpg
+      type: query
+      description: "[optional] a comma separated string of types to return e.g. jpg,png for static, or gif for gifs"
+      disabled: true
+    - name: format
+      value: json
+      type: query
+      description: "[optional] json | src"
+      disabled: true
+    - name: has_breeds
+      value: "true"
+      type: query
+      description: "[optional] - only return images with breed data"
+      disabled: true
+    - name: order
+      value: RANDOM
+      type: query
+      description: "[optional] default:RANDOM - RANDOM | ASC | DESC"
+      disabled: true
+    - name: page
+      value: "0"
+      type: query
+      description: "[optional] paginate through results"
+      disabled: true
+    - name: limit
+      value: "1"
+      type: query
+      description: "[optional] number of results to return, up to 25 with a valid API-Key"
+  auth:
+    type: apikey
+    key: X-API-KEY
+    value: "{{apiKeyCat}}"
+    placement: header
+
+runtime:
+  scripts:
+    - type: after-response
+      code: bru.setNextRequest(null);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: OK
+    request:
+      url: "{{baseUrl}}/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=1"
+      method: GET
+      headers:
+        - name: x-api-key
+          value: YOUR-API-KEY
+        - name: Accept
+          value: application/json
+        - name: X-API-KEY
+          value: <API Key>
+      params:
+        - name: size
+          value: med
+          type: query
+          description: "[optional] thumb , small, med or full - small is perfect for Discord"
+        - name: mime_types
+          value: jpg
+          type: query
+          description: "[optional] a comma separated string of types to return e.g. jpg,png for static, or gif for gifs"
+        - name: format
+          value: json
+          type: query
+          description: "[optional] json | src"
+        - name: has_breeds
+          value: "true"
+          type: query
+          description: "[optional] - only return images with breed data"
+        - name: order
+          value: RANDOM
+          type: query
+          description: "[optional] default:RANDOM - RANDOM | ASC | DESC"
+        - name: page
+          value: "0"
+          type: query
+          description: "[optional] paginate through results"
+        - name: limit
+          value: "1"
+          type: query
+          description: "[optional] number of results to return, up to 25 with a valid API-Key"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Cache-Control
+          value: post-check=0, pre-check=0
+        - name: Connection
+          value: keep-alive
+        - name: Content-Length
+          value: "318"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 20 May 2018 05:20:42 GMT
+        - name: Expires
+          value: Tue, 03 Jul 2001 06:00:00 GMT
+        - name: Last-Modified
+          value: Sun May 20 2018 15:20:42 GMT+1000 (AEST)
+        - name: Vary
+          value: Origin
+        - name: X-Response-Time
+          value: 66ms
+      body:
+        type: json
+        data: |-
+          {
+            "id": "Hylo4Snaf",
+            "url": "https://cdn.thedogapi.com/images/Hylo4Snaf.jpeg",
+            "width": 1200,
+            "height": 922,
+            "mime_type": "image/jpeg",
+            "breeds": [
+              {
+                "id": 235,
+                "name": "Spanish Water Dog",
+                "weight": " 30 to 50 pounds",
+                "height": "16 to 20 inches at the shoulder",
+                "life_span": "12 to 15 years",
+                "breed_group": "Sporting"
+              }
+            ],
+            "categories": []
+          }
+  - name: Unauthorized
+    request:
+      url: "{{baseUrl}}/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=1"
+      method: GET
+      headers:
+        - name: x-api-key
+          value: YOUR-API-KEY
+        - name: Accept
+          value: application/json
+        - name: X-API-KEY
+          value: <API Key>
+      params:
+        - name: size
+          value: med
+          type: query
+          description: "[optional] thumb , small, med or full - small is perfect for Discord"
+        - name: mime_types
+          value: jpg
+          type: query
+          description: "[optional] a comma separated string of types to return e.g. jpg,png for static, or gif for gifs"
+        - name: format
+          value: json
+          type: query
+          description: "[optional] json | src"
+        - name: has_breeds
+          value: "true"
+          type: query
+          description: "[optional] - only return images with breed data"
+        - name: order
+          value: RANDOM
+          type: query
+          description: "[optional] default:RANDOM - RANDOM | ASC | DESC"
+        - name: page
+          value: "0"
+          type: query
+          description: "[optional] paginate through results"
+        - name: limit
+          value: "1"
+          type: query
+          description: "[optional] number of results to return, up to 25 with a valid API-Key"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Connection
+          value: keep-alive
+        - name: Content-Length
+          value: "141"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 19 Aug 2018 12:40:57 GMT
+        - name: Server
+          value: Apache/2.4.33 (Amazon)
+        - name: Strict-Transport-Security
+          value: max-age=15552000; includeSubDomains
+        - name: Vary
+          value: Origin
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-DNS-Prefetch-Control
+          value: off
+        - name: X-Download-Options
+          value: noopen
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-XSS-Protection
+          value: 1; mode=block
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "id": "Hylo4Snaf",
+              "url": "https://cdn.thedogapi.com/images/Hylo4Snaf.jpeg",
+              "width": 1200,
+              "height": 922,
+              "mime_type": "image/jpeg",
+              "breeds": [
+                {
+                  "id": 235,
+                  "name": "Spanish Water Dog",
+                  "weight": " 30 to 50 pounds",
+                  "height": "16 to 20 inches at the shoulder",
+                  "life_span": "12 to 15 years",
+                  "breed_group": "Sporting"
+                }
+              ],
+              "categories": []
+            },
+            {
+              "id": "Hylo4Snaf",
+              "url": "https://cdn.thedogapi.com/images/Hylo4Snaf.jpeg",
+              "width": 1200,
+              "height": 922,
+              "mime_type": "image/jpeg",
+              "breeds": [
+                {
+                  "id": 235,
+                  "name": "Spanish Water Dog",
+                  "weight": " 30 to 50 pounds",
+                  "height": "16 to 20 inches at the shoulder",
+                  "life_span": "12 to 15 years",
+                  "breed_group": "Sporting"
+                }
+              ],
+              "categories": []
+            }
+          ]
+
+docs: |-
+  Searches or returns Random selection from all approved images. Default is to return RANDOM images, but with an API-Key you can use 'order=DESC' or 'order=ASC' along with the 'page' and 'limit' parameters to paginate through them in the order they were approved.
+
+  Pagination-Count, Pagination-Page, and Pagination-Limit headers are present in the response so you know the total number of images that can be paginated through for the passed search filters.
