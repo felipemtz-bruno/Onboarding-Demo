@@ -24,8 +24,12 @@ runtime:
         bru.runner.setNextRequest(chosen);
 
         //const User = 'This is a Runtime Variable';
+
         //const User = bru.interpolate('{{$randomFullName}}');
-        //bru.setVar('statementVar', User)
+
+        //bru.setVar('statementVar', User);
+
+        //console.log('user:' , User);
     - type: tests
       code: |-
         //test("status is 200", function () {
