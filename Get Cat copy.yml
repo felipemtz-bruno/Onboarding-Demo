@@ -1,7 +1,7 @@
 info:
-  name: Get Cat
+  name: Get Cat copy
   type: http
-  seq: 2
+  seq: 5
 
 http:
   method: GET
@@ -9,7 +9,6 @@ http:
   headers:
     - name: x-api-key
       value: YOUR-API-KEY
-      description: "[optional] without it only the a basic set of images can be searched"
     - name: Accept
       value: application/json
   params:
@@ -72,12 +71,10 @@ examples:
       headers:
         - name: x-api-key
           value: YOUR-API-KEY
-          description: "[optional] without it only the a basic set of images can be searched"
         - name: Accept
           value: application/json
         - name: X-API-KEY
           value: <API Key>
-          description: "Added as a part of security scheme: apikey"
       params:
         - name: size
           value: med
@@ -159,12 +156,10 @@ examples:
       headers:
         - name: x-api-key
           value: YOUR-API-KEY
-          description: "[optional] without it only the a basic set of images can be searched"
         - name: Accept
           value: application/json
         - name: X-API-KEY
           value: <API Key>
-          description: "Added as a part of security scheme: apikey"
       params:
         - name: size
           value: med
