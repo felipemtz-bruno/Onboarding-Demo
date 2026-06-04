@@ -1,0 +1,12 @@
+opencollection: 1.0.0
+info:
+  name: "Onboarding Demo Workspace"
+  type: workspace
+
+collections:
+  - name: "Dog or Cat Picture Randomizer"
+    path: "collections/Dog or Cat Picture Randomizer"
+
+specs:
+
+docs: ''
