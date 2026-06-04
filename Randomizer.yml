@@ -30,6 +30,10 @@ runtime:
         //test("status is 200", function () {
         //  expect(res.getStatus()).to.equal(200);
         //});
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
 
 settings:
   encodeUrl: true
