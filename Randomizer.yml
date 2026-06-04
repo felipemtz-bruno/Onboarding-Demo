@@ -9,9 +9,9 @@ http:
   body:
     type: json
     data: |-
-      //{
-        //"Statement": "{{statementVar}}"
-      //}
+      {
+      "Statement": "{{statementVar}}"
+      }
   auth: inherit
 
 runtime:
@@ -24,6 +24,11 @@ runtime:
         bru.runner.setNextRequest(chosen);
         //const tokenValue = 'tokenRuntime';
         //bru.setVar( 'statementVar', tokenValue )
+    - type: tests
+      code: |-
+        //test("status is 200", function () {
+        //  expect(res.getStatus()).to.equal(200);
+        //});
 
 settings:
   encodeUrl: true
