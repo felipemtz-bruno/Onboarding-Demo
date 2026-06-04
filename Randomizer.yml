@@ -23,6 +23,7 @@ runtime:
         console.log("Randomly selected: " + chosen);
         bru.runner.setNextRequest(chosen);
 
+        //const User = 'This is a Runtime Variable';
         //const User = bru.interpolate('{{$randomFullName}}');
         //bru.setVar('statementVar', User)
     - type: tests
