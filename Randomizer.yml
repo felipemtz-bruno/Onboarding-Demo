@@ -23,7 +23,7 @@ runtime:
         console.log("Randomly selected: " + chosen);
         bru.runner.setNextRequest(chosen);
 
-        //const User = 'This is a Runtime Variable';
+        //const User = 'Bruno the Dog';
 
         //const User = bru.interpolate('{{$randomFullName}}');
 
