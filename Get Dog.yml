@@ -1,7 +1,7 @@
 info:
   name: Get Dog
   type: http
-  seq: 3
+  seq: 2
 
 http:
   method: GET
@@ -101,7 +101,6 @@ examples:
           value: application/json
         - name: x-api-key
           value: <API Key>
-          description: "Added as a part of security scheme: apikey"
       params:
         - name: limit
           value: "1"
