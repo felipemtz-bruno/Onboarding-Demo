@@ -1,0 +1,10 @@
+name: CAT API KEY ENV
+variables:
+  - secret: true
+    name: apiKeyDog
+  - name: baseUrlCat
+    value: http://api.thecatapi.com/v1
+  - name: baseUrlDog
+    value: https://api.thedogapi.com/v1
+  - secret: true
+    name: apiKeyCat
