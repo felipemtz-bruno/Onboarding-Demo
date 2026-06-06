@@ -23,23 +23,22 @@ runtime:
         console.log("Randomly selected: " + chosen);
         bru.runner.setNextRequest(chosen);
 
-        //const User = 'Bruno the Dog';
+        const User = 'Bruno the Dog';
 
         //const User = bru.interpolate('{{$randomFullName}}');
 
-        //bru.setVar('statementVar', User);
+        bru.setVar('statementVar', User);
 
         //console.log('user:' , User);
     - type: tests
       code: |-
         //test("status is 200", function () {
-        //  expect(res.getStatus()).to.equal(200);
+          //expect(res.getStatus()).to.equal(200);
         //});
   assertions:
     - expression: res.status
       operator: eq
       value: "200"
-      disabled: true
 
 settings:
   encodeUrl: true

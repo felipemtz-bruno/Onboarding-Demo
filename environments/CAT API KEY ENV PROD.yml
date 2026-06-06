@@ -1,4 +1,4 @@
-name: CAT API KEY ENV
+name: CAT API KEY ENV PROD
 variables:
   - secret: true
     name: apiKeyDog
