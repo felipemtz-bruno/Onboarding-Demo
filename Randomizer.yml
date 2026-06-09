@@ -4,8 +4,8 @@ info:
   seq: 1
 
 http:
-  method: GET
-  url: https://postman-echo.com/get
+  method: POST
+  url: https://echo.usebruno.com/
   body:
     type: json
     data: |-
@@ -23,11 +23,11 @@ runtime:
         console.log("Randomly selected: " + chosen);
         bru.runner.setNextRequest(chosen);
 
-        const User = 'Bruno the Dog';
+        //const User = 'Bruno the Dog';
 
         //const User = bru.interpolate('{{$randomFullName}}');
 
-        bru.setVar('statementVar', User);
+        //bru.setVar('statementVar', User);
 
         //console.log('user:' , User);
     - type: tests
