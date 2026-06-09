@@ -43,6 +43,7 @@ runtime:
     - expression: res.status
       operator: eq
       value: "200"
+      disabled: true
 
 settings:
   encodeUrl: true
