@@ -53,7 +53,11 @@ http:
 runtime:
   scripts:
     - type: after-response
-      code: bru.setNextRequest(null);
+      code: |-
+        bru.setNextRequest(null);
+
+        //const { endChain } = require("./Chain-helper");
+        //endChain(bru);
 
 settings:
   encodeUrl: true

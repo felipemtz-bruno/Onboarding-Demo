@@ -30,6 +30,10 @@ runtime:
         //bru.setVar('statementVar', User);
 
         //console.log('user:' , User);
+
+        //JS file reference after this
+        //const { queueRandom } = require("./Chain-helper");
+        //queueRandom(bru, ["Get Cat", "Get Dog"]);
     - type: tests
       code: |-
         //test("status is 200", function () {
