@@ -1,0 +1,57 @@
+# Runs the "Dog or Cat Picture Randomizer" Bruno collection in (GitHub) Actions.
+name: CI demo
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks out your repository under $GITHUB_WORKSPACE so the job can access it
+      - uses: actions/checkout@v4
+
+      - name: Run a one-line script
+        run: echo GHA Pipeline Execution - Build and Test the repo
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Bruno CLI
+        run: npm install -g @usebruno/cli
+
+      # The reporter does NOT create its output directory, so make it first.
+      - name: Create reports directory
+        run: mkdir -p reports
+
+      # The collection root is the repo root (opencollection.yml lives here),
+      # so no path argument is needed — this runs the whole collection.
+      # API keys are injected from GitHub Secrets because the committed
+      # environment stores them as empty secret variables.
+      - name: Run API Tests
+        run: >
+          bru run
+          --env "CAT API KEY ENV"
+          --env-var "apiKeyCat=${{ secrets.CAT_API_KEY }}"
+          --env-var "apiKeyDog=${{ secrets.DOG_API_KEY }}"
+          --reporter-html reports/results.html
+          --sandbox developer
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        # Upload the report even when tests fail, so failures are inspectable.
+        if: always()
+        with:
+          name: test-results
+          path: reports/results.html
