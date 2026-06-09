@@ -1,12 +1,12 @@
 name: CAT API KEY ENV
 variables:
-  - secret: true
-    name: apiKeyDog
+  - name: apiKeyDog
+    value: live_FP557BveZN22K1SVubsNK5ziogLwCD1aMbKMEZ9tcUSu03B8dnGq9BJf7EhYIDbD
   - name: baseUrlCat
     value: http://api.thecatapi.com/v1
   - name: baseUrlDog
     value: https://api.thedogapi.com/v1
-  - secret: true
-    name: apiKeyCat
+  - name: apiKeyCat
+    value: live_PN8y60vulArIzQH7G0qtdhbUpnPhNT0xlEMd4Bzd7jcPHoJRovPH64htDftlaSdA
   - name: statementVar
     value: Bruno
