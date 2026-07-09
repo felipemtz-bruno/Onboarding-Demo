@@ -84,16 +84,73 @@ runtime:
   scripts:
     - type: after-response
       code: |-
-        bru.setNextRequest(null);
+        //bru.setNextRequest(null);
 
-        //const { endChain } = require("./Chain-helper.js");
-        //endChain(bru);
+        const { endChain } = require("./Chain-helper.js");
+        endChain(bru);
 
 settings:
   encodeUrl: true
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |-
+  # Get dog
+
+  Fetches a random dog image from **The Dog API** (`/images/search`). This is one
+  of the two leaf requests in the collection; it is normally reached from
+  `Randomizer` but can also be sent on its own.
+
+  ## What it does
+
+  - **Method / URL:** `GET {{baseUrlDog}}/images/search?limit=1`
+    (`baseUrlDog` → `https://api.thedogapi.com/v1`).
+  - **Headers:** `Accept: application/json`.
+  - **Auth:** API key sent in the `x-api-key` header, value `{{apiKeyDog}}`
+    (resolved from the environment).
+
+  ## Query parameters
+
+  Only `limit` is enabled by default; the rest are **disabled** and can be turned
+  on in the Params tab as needed.
+
+  | Param                  | Example      | Description |
+  | ---------------------- | ------------ | ----------- |
+  | `limit`                | `1`          | Maximum number of results to return (default 10). |
+  | `page`                 | `0`          | Zero-based page index. |
+  | `order`                | `RANDOM`     | Sort order of the results. |
+  | `species_id`           | `1`          | Filter images by species identifier. |
+  | `breed_groups`         | `Toy,Hound`  | Comma-separated breed groups to include. |
+  | `exclude_breed_groups` | `Mixed`      | Comma-separated breed groups to exclude. |
+  | `lang`                 | `it`         | Return translated fields for the given language code. |
+  | `has_breeds`           | `true`       | Filter to images that have breed metadata. |
+  | `include_breeds`       | `false`      | Include breed information in the response. |
+  | `include_categories`   | `true`       | Include category information in the response. |
+  | `account_id`           | `account-123`| Return images belonging to this account. |
+  | `breed_id`             | `1`          | Filter results by breed identifier. |
+  | `sub_id`               | `my-custom-id`| Filter results by sub identifier. |
+
+  ## Scripting
+
+  An **after-response script** ends the chain so nothing else runs after this
+  request during a collection run:
+
+  ```js
+  const { endChain } = require("./Chain-helper.js");
+  endChain(bru);   // calls bru.runner.setNextRequest(null)
+  ```
+
+  ## Responses
+
+  - **200 OK** — a JSON array of image objects (`id`, `url`, `width`, `height`,
+    `species_id`) with optional rich `breeds`, `categories`, and `childImages`
+    data. See the saved example for the full shape.
+
+  ## Notes
+
+  The environment currently maps `apiKeyDog` to a live The Dog API key. Keep real
+  keys in an environment or secret file rather than hard-coding them in the request.
 
 examples:
   - name: List of images that match the search criteria

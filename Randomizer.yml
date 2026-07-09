@@ -23,13 +23,13 @@ runtime:
         console.log("Randomly selected: " + chosen);
         bru.runner.setNextRequest(chosen);
 
-        //const User = 'Bruno the Dog';
+        const User = 'Bruno the Dog';
 
         //const User = bru.interpolate('{{$randomFullName}}');
 
-        //bru.setVar('statementVar', User);
+        bru.setVar('statementVar', User);
 
-        //console.log('user:' , User);
+        console.log('user:' , User);
 
         //JS file reference after this
         //const { queueRandom } = require("./Chain-helper");
@@ -43,10 +43,56 @@ runtime:
     - expression: res.status
       operator: eq
       value: "200"
-      disabled: true
 
 settings:
   encodeUrl: true
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |-
+  # Randomizer
+
+  Entry point of the **Dog or Cat Picture Randomizer** collection. Running this
+  request (or running the whole collection) kicks off a two-step chain: it picks
+  either `Get Cat` or `Get Dog` at random and queues it to run next.
+
+  ## What it does
+
+  - **Method / URL:** `POST https://echo.usebruno.com/`
+    (a request/response echo service used purely as a harmless target).
+  - **Body (JSON):**
+    ```json
+    { "User": "{{statementVar}}" }
+    ```
+    `statementVar` is set by the pre-request script (see below).
+  - **Auth:** inherited from the collection.
+
+  ## Scripting
+
+  A **pre-request script** drives the random branch:
+
+  ```js
+  const requests = ["Get Cat", "Get Dog"];
+  const chosen = requests[Math.floor(Math.random() * requests.length)];
+  bru.runner.setNextRequest(chosen);   // queue the next request in the run
+
+  const User = 'Bruno the Dog';
+  bru.setVar('statementVar', User);    // exposed to the request body as {{statementVar}}
+  ```
+
+  - `bru.runner.setNextRequest(name)` — each name must match the target
+    request's `info.name` **exactly** (`Get Cat`, `Get Dog`).
+  - `bru.setVar('statementVar', ...)` — sets the runtime variable interpolated
+    into the request body.
+  - A commented-out alternative uses the shared `chain-helper.js` module
+    (`queueRandom(bru, ["Get Cat", "Get Dog"])`) to do the same branching.
+
+  > **Note:** `setNextRequest` only takes effect when requests run as a sequence
+  > (Collection Runner / `bru run`), not when a single request is sent manually.
+
+  ## Assertions
+
+  | Expression   | Operator | Value |
+  | ------------ | -------- | ----- |
+  | `res.status` | `eq`     | `200` |

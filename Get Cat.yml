@@ -54,10 +54,10 @@ runtime:
   scripts:
     - type: after-response
       code: |-
-        bru.setNextRequest(null);
+        //bru.setNextRequest(null);
 
-        //const { endChain } = require("./Chain-helper");
-        //endChain(bru);
+        const { endChain } = require("./Chain-helper");
+        endChain(bru);
 
 settings:
   encodeUrl: true
@@ -264,6 +264,57 @@ examples:
           ]
 
 docs: |-
-  Searches or returns Random selection from all approved images. Default is to return RANDOM images, but with an API-Key you can use 'order=DESC' or 'order=ASC' along with the 'page' and 'limit' parameters to paginate through them in the order they were approved.
+  # Get Cat
 
-  Pagination-Count, Pagination-Page, and Pagination-Limit headers are present in the response so you know the total number of images that can be paginated through for the passed search filters.
+  Fetches a random cat image from **The Cat API** (`/images/search`). This is one
+  of the two leaf requests in the collection; it is normally reached from
+  `Randomizer` but can also be sent on its own.
+
+  ## What it does
+
+  - **Method / URL:** `GET {{baseUrlCat}}/images/search?limit=1`
+    (`baseUrlCat` → `http://api.thecatapi.com/v1`).
+  - **Headers:** `Accept: application/json`.
+  - **Auth:** API key sent in the `X-API-KEY` header, value `{{apiKeyCat}}`
+    (resolved from the environment).
+
+  ## Query parameters
+
+  All parameters below are optional and **disabled by default** except `limit`.
+  Enable them in the Params tab as needed.
+
+  | Param            | Example  | Description |
+  | ---------------- | -------- | ----------- |
+  | `limit`          | `1`      | Number of results to return (up to 25 with a valid API key). |
+  | `size`           | `med`    | `thumb`, `small`, `med`, or `full`. |
+  | `mime_types`     | `jpg`    | Comma-separated types, e.g. `jpg,png` (static) or `gif`. |
+  | `format`         | `json`   | `json` or `src`. |
+  | `has_breeds`     | `true`   | Only return images that have breed data. |
+  | `order`          | `RANDOM` | `RANDOM` (default), `ASC`, or `DESC`. |
+  | `page`           | `0`      | Page index for pagination. |
+
+  ## Scripting
+
+  An **after-response script** ends the chain so nothing else runs after this
+  request during a collection run:
+
+  ```js
+  const { endChain } = require("./Chain-helper");
+  endChain(bru);   // calls bru.runner.setNextRequest(null)
+  ```
+
+  ## Responses
+
+  - **200 OK** — a JSON array of image objects (`id`, `url`, `width`, `height`,
+    `mime_type`, optional `breeds`, `categories`). See the saved `OK` example.
+  - **401 Unauthorized** — returned when the API key is missing or invalid. See
+    the saved `Unauthorized` example.
+
+  ## Notes
+
+  Searches or returns a RANDOM selection from all approved images. The default is
+  RANDOM, but with an API key you can use `order=DESC` or `order=ASC` together
+  with `page` and `limit` to paginate through images in approval order.
+
+  `Pagination-Count`, `Pagination-Page`, and `Pagination-Limit` response headers
+  report the total number of images available for the given search filters.
