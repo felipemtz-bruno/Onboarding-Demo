@@ -18,16 +18,14 @@ runtime:
   scripts:
     - type: before-request
       code: |-
-        const requests = ["Get Cat", "Get Dog"];
-        const chosen = requests[Math.floor(Math.random() * requests.length)];
-        console.log("Randomly selected: " + chosen);
-        bru.runner.setNextRequest(chosen);
+        //const requests = ["Get Cat", "Get Dog"];
+        //const chosen = requests[Math.floor(Math.random() * requests.length)];
+        //console.log("Randomly selected: " + chosen);
+        //bru.runner.setNextRequest(chosen);
 
         const User = 'Bruno the Dog';
 
-        //const User = bru.interpolate('{{$randomFullName}}');
-
-        bru.setVar('statementVar', User);
+        //bru.setVar('statementVar', User);
 
         console.log('user:' , User);
 

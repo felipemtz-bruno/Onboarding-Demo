@@ -56,8 +56,8 @@ runtime:
       code: |-
         //bru.setNextRequest(null);
 
-        const { endChain } = require("./Chain-helper");
-        endChain(bru);
+        //const { endChain } = require("./Chain-helper");
+        //endChain(bru);
 
 settings:
   encodeUrl: true
