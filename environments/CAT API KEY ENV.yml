@@ -1,12 +1,17 @@
 name: CAT API KEY ENV
 variables:
-  - name: apiKeyDog
-    value: live_FP557BveZN22K1SVubsNK5ziogLwCD1aMbKMEZ9tcUSu03B8dnGq9BJf7EhYIDbD
+  - secret: true
+    name: apiKeyDog
   - name: baseUrlCat
     value: http://api.thecatapi.com/v1
   - name: baseUrlDog
     value: https://api.thedogapi.com/v1
-  - name: apiKeyCat
-    value: live_PN8y60vulArIzQH7G0qtdhbUpnPhNT0xlEMd4Bzd7jcPHoJRovPH64htDftlaSdA
+  - secret: true
+    name: apiKeyCat
   - name: statementVar
     value: Bruno
+externalSecrets:
+  type: azure-key-vault
+  variables:
+    - name: demo-integration
+      vaultName: CSE-Demo

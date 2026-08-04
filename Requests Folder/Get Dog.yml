@@ -1,7 +1,7 @@
 info:
   name: Get Dog
   type: http
-  seq: 3
+  seq: 2
 
 http:
   method: GET
@@ -86,8 +86,8 @@ runtime:
       code: |-
         //bru.setNextRequest(null);
 
-        //const { endChain } = require("./Chain-helper.js");
-        //endChain(bru);
+        const { endChain } = require("./Chain-helper.js");
+        endChain(bru);
 
 settings:
   encodeUrl: true

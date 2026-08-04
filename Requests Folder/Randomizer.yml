@@ -25,22 +25,23 @@ runtime:
 
         const User = 'Bruno the Dog';
 
-        //bru.setVar('statementVar', User);
+        bru.setVar('statementVar', User);
 
         console.log('user:' , User);
 
         //JS file reference after this
-        //const { queueRandom } = require("./Chain-helper");
-        //queueRandom(bru, ["Get Cat", "Get Dog"]);
+        const { queueRandom } = require("./Chain-helper");
+        queueRandom(bru, ["Get Cat", "Get Dog"]);
     - type: tests
       code: |-
-        //test("status is 200", function () {
-          //expect(res.getStatus()).to.equal(200);
-        //});
+        test("status is 200", function () {
+          expect(res.getStatus()).to.equal(200);
+        });
   assertions:
     - expression: res.status
       operator: eq
       value: "200"
+      disabled: true
 
 settings:
   encodeUrl: true
