@@ -56,7 +56,7 @@ runtime:
       code: |-
         //bru.setNextRequest(null);
 
-        const { endChain } = require("./Chain-helper");
+        const { endChain } = require("./chain-helper.js");
         endChain(bru);
 
 settings:
@@ -299,7 +299,7 @@ docs: |-
   request during a collection run:
 
   ```js
-  const { endChain } = require("./Chain-helper");
+  const { endChain } = require("./chain-helper.js");
   endChain(bru);   // calls bru.runner.setNextRequest(null)
   ```
 
