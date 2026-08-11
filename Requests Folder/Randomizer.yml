@@ -30,7 +30,7 @@ runtime:
         console.log('user:' , User);
 
         //JS file reference after this
-        const { queueRandom } = require("./Chain-helper");
+        const { queueRandom } = require("./chain-helper.js");
         queueRandom(bru, ["Get Cat", "Get Dog"]);
     - type: tests
       code: |-
