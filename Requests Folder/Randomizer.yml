@@ -18,14 +18,16 @@ runtime:
   scripts:
     - type: before-request
       code: |-
+        //Randomizer logic below this
         //const requests = ["Get Cat", "Get Dog"];
         //const chosen = requests[Math.floor(Math.random() * requests.length)];
         //console.log("Randomly selected: " + chosen);
         //bru.runner.setNextRequest(chosen);
 
+        //Runtime variable demo below this
         const User = 'Bruno the Dog';
 
-        bru.setVar('statementVar', User);
+        //bru.setVar('statementVar', User);
 
         console.log('user:' , User);
 
