@@ -35,7 +35,7 @@ runtime:
     - type: tests
       code: |-
         test("status is 200", function () {
-          expect(res.getStatus()).to.equal(201);
+          expect(res.getStatus()).to.equal(200);
         });
   assertions:
     - expression: res.status
