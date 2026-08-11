@@ -84,8 +84,10 @@ runtime:
   scripts:
     - type: after-response
       code: |-
+        //script logic below
         //bru.setNextRequest(null);
 
+        //JS ref below
         //const { endChain } = require("./chain-helper.js");
         //endChain(bru);
 
