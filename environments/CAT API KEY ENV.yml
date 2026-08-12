@@ -1,15 +1,19 @@
 name: CAT API KEY ENV
 variables:
-  - secret: true
-    name: apiKeyDog
   - name: baseUrlCat
     value: http://api.thecatapi.com/v1
   - name: baseUrlDog
     value: https://api.thedogapi.com/v1
-  - secret: true
-    name: apiKeyCat
   - name: statementVar
     value: Bruno
+  - secret: true
+    name: apiKeyDog
+    disabled: true
+    description: ""
+  - secret: true
+    name: apiKeyCat
+    disabled: true
+    description: ""
 externalSecrets:
   type: azure-key-vault
   variables:
